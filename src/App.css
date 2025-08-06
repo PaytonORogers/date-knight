@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  flex-direction: column;
+  background-color: black;
+  color: white;
+}
+
+.navbar {
+  border: solid 2px white;
+}
+
+.column-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.dinner-column {
+  width: 100%;
+  border: solid 2px white;
+}
+
+.drink-column {
+  width: 100%;
+  border: solid 2px white;
+}
+
+.show-column {
+  width: 100%;
+  border: solid 2px white;
+}
