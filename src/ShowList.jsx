@@ -10,11 +10,7 @@ export function ShowList({setShow, show}) {
   }, [])
   return(
     <>
-      {
-        show ?
-        <p>{show[0].name}</p>
-        : <p>Waiting</p>
-      }
+      {show.name}<br/>
     </>
   )
 }

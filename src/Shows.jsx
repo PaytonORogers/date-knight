@@ -14,7 +14,7 @@ export function Shows() {
     <>
       <p>"Testing Shows"</p>
       <div className='tile'>
-        {show.map(show => <ShowList setShow={SetShow} key={show.id}/>)}
+        {show.map(show => <ShowList show={show} setShow={SetShow} key={show.id}/>)}
       </div>
       {/* <ShowList setShow={SetShow} show={show}/> */}
     </>
