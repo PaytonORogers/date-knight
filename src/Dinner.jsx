@@ -4992,7 +4992,7 @@ var testData = {
 }
 
 export function Dinner() {
-  const [recipeList, setRecipes] = useState([]);
+  const [recipeList, setRecipes] = useState([{ "title": "Loading" }]);
   const [page, setPage] = useState()
 
   useEffect(() => {
@@ -5003,27 +5003,19 @@ export function Dinner() {
 
   useEffect(() => {
     console.log(recipeList)
-    if (recipeList != null) {
-      var tempPage = [];
-      // recipeList.map((item) => { tempPage.push(<p>{item["title"]}</p>) });
-      // setPage(tempPage);
-      // console.log(tempPage);
-      // console.log(page);
-    }
   }, [recipeList])
 
 
   const randomFetch = async (apikey, numOfResults, query) => {
     // const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apikey}&number=${numOfResults}${query}`)
     // const data = await response.json();
-    // setRecipes(data);
     setRecipes(testData.recipes);
   }
 
 
   function recipe(obj) {
 
-    return 
+  return
   }
   return (
     <>
