@@ -1,4 +1,8 @@
 import { useState, useEffect } from 'react'
+import { DinnerDetails } from './DinnerDetails.jsx'
+
+
+// Sample data from the spoonful API since they have rate limits :(
 var testData = {
   "recipes": [
     {
@@ -4991,43 +4995,120 @@ var testData = {
   ]
 }
 
-export function Dinner() {
-  const [recipeList, setRecipes] = useState([{ "title": "Loading" }]);
-  const [page, setPage] = useState()
+/* 
+
+  ,   A           {}
+ / \, | ,        .--.
+|    =|= >      /.--.\
+ \ /` | `       |====|
+  `   |         |`::`|  
+      |     .-;`\..../`;_.-^-._
+     /\\/  /  |...::..|`   :   `|
+     |:'\ |   /'''::''|   .:.   |
+      \ /\;-,/\   ::  |..:::::..|
+      |\ <` >  >._::_.| ':::::' |
+      | `""`  /   ^^  |   ':'   |
+      |       |       \    :    /
+      |       |        \   :   / 
+      |       |___/\___|`-.:.-`
+      |        \_ || _/    `
+      |        <_ >< _>
+      |        |  ||  |
+      |        |  ||  |
+      |       _\.:||:./_
+      | jgs  /____/\____\
+
+  KEYS!!!!
+
+  Michael
+  1883358fb3a14c58bfd41cc0fa9f482a
+
+  Nikki
+  6fd6163177664e98a8c78b8f32668198
+
+  Payton
+  6fe330674ab24f78aa826a0b74516e31 
+
+  Alex
+  f93b30dc9b1741f2b517a4df8c506e5a
+
+
+*/
+// api key for spoonful API
+const apikey = "6fe330674ab24f78aa826a0b74516e31";
+
+export function Dinner({ genre, setGenre }) {
+  // stores the return from spoonful API
+  const [recipeList, setRecipeList] = useState([{ "title": "Loading" }]);
+  // used for rendering details page on recipe click
+  const [detailsPage, setDetailsPage] = useState(null)
 
   useEffect(() => {
-    var query = "&tag=italian";
-    var apikey = "6fe330674ab24f78aa826a0b74516e31";
-    randomFetch(apikey, 10, query);
+    var query = "";
+    setRecipeList(testData.recipes)
+    // randomFetch(apikey, 10, query);
   }, []);
 
-  
+
   useEffect(() => {
+    console.log(genre)
+    if (genre.includes("Anime")) {
+      randomFetch(apikey, 10, ",Japanese")
+    } else if (genre.includes("Romance")) {
+      randomFetch(apikey, 10, ",Italian")
+    } else if (genre.includes("Fantasy")) {
+      randomFetch(apikey, 10, ",Nordic")
+    } else if (genre.includes("Adventure")) {
+      randomFetch(apikey, 10, ",Caribbean,LatinAmerican")
+    } else if (genre.includes("DIY")) {
+      randomFetch(apikey, 10, ",American")
+    } else if (genre.includes("Espionage")) {
+      randomFetch(apikey, 10, ",British")
+    } else if (genre.includes("Food")) {
+      randomFetch(apikey, 10, ",French")
+    } else if (genre.includes("Legal")) {
+      randomFetch(apikey, 10, ",Chinese")
+    } else if (genre.includes("Mystery")) {
+      randomFetch(apikey, 10, ",British")
+    } else if (genre.includes("Nature")) {
+      randomFetch(apikey, 10, ",Nordic")
+    } else if (genre.includes("Travel")) {
+      randomFetch(apikey, 10, ",European")
+    } else if (genre.includes("War")) {
+      randomFetch(apikey, 10, ",EasternEuropean")
+    } else if (genre.includes("Western")) {
+      randomFetch(apikey, 10, ",American")
+    } else {
+      randomFetch(apikey, 10, "")
+    }
+  }, [genre])
 
-  }, [recipeList])
 
-
-// fetches a random list of recipes by query as a properly asynced function
+  // fetches a random list of recipes by query as a properly asynced function
 
   const randomFetch = async (apikey, numOfResults, query) => {
-    // const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apikey}&number=${numOfResults}${query}`)
+    // const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apikey}&number=${numOfResults}&include-tags=${query}`)
     // const data = await response.json();
-    setRecipes(testData.recipes);
+    // console.log(data.recipes);
+    // setRecipeList(data.recipes);
+    setRecipeList(testData.recipes);
   }
 
 
-  function recipe(obj) {}
+  function recipe(obj) { }
 
   return (
     <>
-      {recipeList.map(item => (
-        <div>
-        <img src={item["image"]}/>
-        <p>{item["title"]}</p>
-        </div>
-        ))}
+      <div>
+        {detailsPage ?
+          detailsPage
+          : recipeList.map(item => (
+            <div className="recipe-poster" onClick={() => {DinnerDetails(item, setDetailsPage)}}>
+              <p className="recipe-title">{item["title"]}</p>
+              <img className="recipe-image" src={item["image"]} />
+            </div>
+          ))}
+      </div>
     </>
   )
 }
-
-

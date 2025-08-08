@@ -1,36 +1,152 @@
+@font-face {
+  font-family: "Bitstream Vera Serif Bold";
+  src: url("https://mdn.github.io/shared-assets/fonts/VeraSeBd.ttf");
+}
+
+
 body {
   display: flex;
   flex-direction: column;
-  background-color: black;
   color: white;
+  background: linear-gradient(45deg, #2e3b40, rgb(198, 25, 13), #2e3b40); 
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  font-family: "Bitstream Vera Serif Bold";
 }
 
 .navbar {
-  border: solid 2px white;
+  border: solid 5px rgb(13, 13, 13);
+  /* padding: 1rem 2rem; */
+  background-color: rgba(0, 0, 0, 0.4);
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  font-family: "Bitstream Vera Serif Bold";
+}
+
+
+.logoLarge {
+  height: 175px;
 }
 
 .column-container {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  height: 49vw;
+  
 }
 
 .dinner-column {
   width: 100%;
-  border: solid 2px white;
-  height: 60vw;
-  overflow-y: scroll;
+  overflow-y: scroll; 
+}
+
+.recipe-poster {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+}
+
+.return-button {
+  width: 100%;
+}
+
+.recipe-title {
+  text-align: center;
+}
+
+.recipe-description {
+  margin-left: 30px;
+  margin-right: 30px;
+}
+
+.ingredients-title {
+  text-align: center;
+  font-size: large;
+}
+
+.ingredients-list {
+  list-style-type: none;  
+}
+
+.steps-title {
+  text-align: center;
+  font-size: large;
 }
 
 .drink-column {
   width: 100%;
-  border: solid 2px white;
-  height: 60vw;
   overflow-y: scroll;
 }
 
 .show-column {
   width: 100%;
-  border: solid 2px white;
-  height: 60vw;
   overflow-y: scroll;
+} 
+
+.show-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  text-wrap: wrap;
+  margin-left: 15px;
 }
+
+.Movie-Poster {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+  margin-bottom: 50px;
+}
+
+.showResetButton {
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-family: "Bitstream Vera Serif Bold";
+}
+
+.poster-title {
+  width: 200px;
+  text-align: center;
+}
+
+.Poster {
+  margin-left: 45px;
+  margin-right: 45px;
+}
+
+.details-page {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.description {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  margin-right: 40px;
+}
+
+.poster-description {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* .dinner-column:hover,
+.drink-column:hover,
+.show-column:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); */

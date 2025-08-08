@@ -3,7 +3,11 @@ import { ShowDetails } from './ShowDetails.jsx'
 import { ShowTile } from './ShowTile.jsx'
 
 export function Shows({ genre, setGenre }) {
-  useEffect(() => {console.log("shows.jsx says " + genre)}, [genre])
+  const [searchButtonClicked, setSearchButtonClicked ] = useState(false)
+  
+  useEffect(() => { console.log("shows.jsx says " + genre) }, [genre])
+  const [showSearch, setShowSearch] = useState('')
+
   let genreList = []
   const [showList, setShow] = useState([{
     "id": 1,
@@ -67,22 +71,64 @@ export function Shows({ genre, setGenre }) {
   }])
   const [detailsPage, setDetailsPage] = useState(null)
   let test = showList.map(show => genreList.push(show.genres))
+
   useEffect(() => {
     fetch("https://api.tvmaze.com/shows")
       .then(res => res.json())
       .then(data => setShow(data))
   }, [])
 
+  useEffect(()=> {
+    function queryShowSetter(formData) {
+      const newList = []
+      const query = formData.get('showSearch')
+      console.log(query)
+      for(item of showList) {
+        if(item.name.includes(query) === true) {
+          newList.push(item)
+        } 
+      }
+      //setShow(query)
+      console.log(newList)
+    }
+  },[searchButtonClicked])
+   
+
   return (
     <>
+      <form
+        id="search"
+        action={setSearchButtonClicked}
+      >
+        <input
+          type="text"
+          placeholder="Search For Shows"
+          name='showSearch'
+        />
+        <input type='submit' value='Search' />
+      </form>
+
       {detailsPage ?
         detailsPage
-        : <div className='show-list'>
+        :
+        <div className='show-list'>
           {showList.map(show => <ShowTile genre={genre} setGenre={setGenre} setDetailsPage={setDetailsPage} show={show} key={show.id} />)}
         </div>
       }
+
     </>
   )
 }
 
+// function search(formData) {
+//     const query = formData.get("showSearch");
+//     alert(`You searched for '${query}'`);
+//   }
 
+// function enterSubmit(input) {
+  //   //if keystroke is enter
+  //   // do same as search button
+  //   //queryShowSetter(input)
+  //   console.log(input)
+  //   //else ignore
+  // }

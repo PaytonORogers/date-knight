@@ -7,9 +7,11 @@ export function ShowTile({ show, setDetailsPage, genre, setGenre }) {
     console.log("ShowTile.jsx says " + genre)
   }, [genre])
   return(
-    <div className="Movie-Poster" onClick={() => ShowDetails(show, setDetailsPage, genre, setGenre)}>
-        {show.name}<br />
-        <img src={show.image.medium} />
-    </div>
+    <>
+      <div className="Movie-Poster" onClick={() => ShowDetails(show, setDetailsPage, genre, setGenre)}>
+          <div className="poster-title">{show.name}</div>
+          <img className="Poster" src={show.image.medium} />
+      </div>
+    </>
   )
 }
