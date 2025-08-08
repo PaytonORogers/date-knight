@@ -1,12 +1,20 @@
-# React + Vite
+Date Knight is a fun and easy-to-use website that helps you plan the perfect meal to enjoy while watching your favorite movie or TV show. Simply search for a show using the search bar or choose from a curated list. Once you select a title, a delicious meal suggestion will appear!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Click on any show to view more details-recommended meal pairings will be displayed on the right. Select a meal to see its full recipe, including ingredients and step-by-step instructions.
 
-Currently, two official plugins are available:
+No downloads or installation required-just browse, choose, and cook!
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+We'd like to thank TV Maze and Spoonacular for their amazing APIs, which made this project possible.
 
-## Expanding the ESLint configuration
+Created by: Payton Rogers, Michael Leibolt, Alex Morgan, and Nicole Gabor
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+# Start-up
+
+To run this application in your terminal navigate to the root directory and use the following commands.
+
+npm install
+
+npm run dev
+
+You will now be able to connect to the webpage at the adress and port specified in your terminal.
+

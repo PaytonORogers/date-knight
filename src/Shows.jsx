@@ -3,11 +3,10 @@ import { ShowDetails } from './ShowDetails.jsx'
 import { ShowTile } from './ShowTile.jsx'
 
 export function Shows({ genre, setGenre }) {
-  const [searchButtonClicked, setSearchButtonClicked ] = useState(false)
-  
+  const [searchButtonClicked, setSearchButtonClicked ] = useState(null)
   useEffect(() => { console.log("shows.jsx says " + genre) }, [genre])
   const [showSearch, setShowSearch] = useState('')
-
+  const wait = null
   let genreList = []
   const [showList, setShow] = useState([{
     "id": 1,
@@ -72,40 +71,29 @@ export function Shows({ genre, setGenre }) {
   const [detailsPage, setDetailsPage] = useState(null)
   let test = showList.map(show => genreList.push(show.genres))
 
+// search bar input ? input => {displayList = showList.filter(input)} : displayList = showlist
+
   useEffect(() => {
     fetch("https://api.tvmaze.com/shows")
       .then(res => res.json())
       .then(data => setShow(data))
   }, [])
 
-  useEffect(()=> {
-    function queryShowSetter(formData) {
-      const newList = []
-      const query = formData.get('showSearch')
-      console.log(query)
-      for(item of showList) {
-        if(item.name.includes(query) === true) {
-          newList.push(item)
-        } 
-      }
-      //setShow(query)
-      console.log(newList)
-    }
-  },[searchButtonClicked])
-   
-
+  useEffect(() => {
+    console.log(showSearch.value)
+  }, [wait])
+  
   return (
     <>
       <form
-        id="search"
-        action={setSearchButtonClicked}
+        className='searchBar'
       >
         <input
           type="text"
           placeholder="Search For Shows"
           name='showSearch'
         />
-        <input type='submit' value='Search' />
+        <input type='submit' value="submit" />
       </form>
 
       {detailsPage ?

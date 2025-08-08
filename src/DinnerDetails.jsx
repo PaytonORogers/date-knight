@@ -13,7 +13,7 @@ export function DinnerDetails(recipe, setDetailsPage) {
       </ul>
       <p className="steps-title">Steps</p>
       <ol className="recipe-steps">
-        {recipe.analyzedInstructions[0] == undefined ? null : recipe.analyzedInstructions[0].steps.map(item => (<li><p>{item.step}</p></li>))}
+        {recipe.analyzedInstructions[0] == undefined ? <p className="no-recipe-steps">Recipe steps not provided... sad... :(</p> : recipe.analyzedInstructions[0].steps.map(item => (<li><p>{item.step}</p></li>))}
       </ol>
     </>
   )

@@ -8,7 +8,7 @@ body {
   display: flex;
   flex-direction: column;
   color: white;
-  background: linear-gradient(45deg, #2e3b40, rgb(198, 25, 13), #2e3b40); 
+  background: linear-gradient(45deg, #2e3b40, rgb(198, 25, 13), #2e3b40);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
   font-family: "Bitstream Vera Serif Bold";
@@ -33,12 +33,12 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   height: 49vw;
-  
+
 }
 
 .dinner-column {
   width: 100%;
-  overflow-y: scroll; 
+  overflow-y: scroll;
 }
 
 .recipe-poster {
@@ -50,6 +50,9 @@ body {
 
 .return-button {
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  font-family: "Bitstream Vera Serif Bold";
 }
 
 .recipe-title {
@@ -64,15 +67,20 @@ body {
 .ingredients-title {
   text-align: center;
   font-size: large;
+  font-family: "Bitstream Vera Serif Bold";
 }
 
 .ingredients-list {
-  list-style-type: none;  
+  list-style-type: none;
 }
 
 .steps-title {
   text-align: center;
   font-size: large;
+}
+
+.no-recipe-steps {
+  text-align: center;
 }
 
 .drink-column {
@@ -83,7 +91,7 @@ body {
 .show-column {
   width: 100%;
   overflow-y: scroll;
-} 
+}
 
 .show-list {
   display: flex;
@@ -137,12 +145,27 @@ body {
   justify-content: center;
   align-items: center;
   justify-items: center;
+} 
+
+.searchBar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center; 
 }
 
 @keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 /* .dinner-column:hover,
