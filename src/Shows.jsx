@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react'
-import { ShowDetails } from './ShowDetails.jsx'
 import { ShowTile } from './ShowTile.jsx'
 
 export function Shows({ genre, setGenre }) {
-  const [searchButtonClicked, setSearchButtonClicked ] = useState(null)
   useEffect(() => { console.log("shows.jsx says " + genre) }, [genre])
   const [showSearch, setShowSearch] = useState('')
-  const wait = null
-  let genreList = []
   const [showList, setShow] = useState([{
     "id": 1,
     "url": "https://www.tvmaze.com/shows/1/under-the-dome",
@@ -69,54 +65,111 @@ export function Shows({ genre, setGenre }) {
     }
   }])
   const [detailsPage, setDetailsPage] = useState(null)
-  let test = showList.map(show => genreList.push(show.genres))
+  const [queryShow, setQueryShow] = useState([{
+    "id": 1,
+    "url": "https://www.tvmaze.com/shows/1/under-the-dome",
+    "name": "Under the Dome",
+    "type": "Scripted",
+    "language": "English",
+    "genres": [
+      "Drama",
+      "Science-Fiction",
+      "Thriller"
+    ],
+    "status": "Ended",
+    "runtime": 60,
+    "averageRuntime": 60,
+    "premiered": "2013-06-24",
+    "ended": "2015-09-10",
+    "officialSite": "http://www.cbs.com/shows/under-the-dome/",
+    "schedule": {
+      "time": "22:00",
+      "days": [
+        "Thursday"
+      ]
+    },
+    "rating": {
+      "average": 6.5
+    },
+    "weight": 99,
+    "network": {
+      "id": 2,
+      "name": "CBS",
+      "country": {
+        "name": "United States",
+        "code": "US",
+        "timezone": "America/New_York"
+      },
+      "officialSite": "https://www.cbs.com/"
+    },
+    "webChannel": null,
+    "dvdCountry": null,
+    "externals": {
+      "tvrage": 25988,
+      "thetvdb": 264492,
+      "imdb": "tt1553656"
+    },
+    "image": {
+      "medium": "https://static.tvmaze.com/uploads/images/medium_portrait/81/202627.jpg",
+      "original": "https://static.tvmaze.com/uploads/images/original_untouched/81/202627.jpg"
+    },
+    "summary": "<p><b>Under the Dome</b> is the story of a small town that is suddenly and inexplicably sealed off from the rest of the world by an enormous transparent dome. The town's inhabitants must deal with surviving the post-apocalyptic conditions while searching for answers about the dome, where it came from and if and when it will go away.</p>",
+    "updated": 1747942783,
+    "_links": {
+      "self": {
+        "href": "https://api.tvmaze.com/shows/1"
+      },
+      "previousepisode": {
+        "href": "https://api.tvmaze.com/episodes/185054",
+        "name": "The Enemy Within"
+      }
+    }
+  }])
 
-// search bar input ? input => {displayList = showList.filter(input)} : displayList = showlist
+  function queryGetter(e) {
+    const filtered = showList.filter(show => show.name.toLowerCase().includes(e.toLowerCase()))
+    console.log(filtered)
+    setQueryShow(filtered)
+
+  }
 
   useEffect(() => {
     fetch("https://api.tvmaze.com/shows")
       .then(res => res.json())
-      .then(data => setShow(data))
+      .then(data => {
+        setShow(data)
+        setQueryShow(data)
+      })
   }, [])
 
-  useEffect(() => {
-    console.log(showSearch.value)
-  }, [wait])
-  
   return (
     <>
-      <form
-        className='searchBar'
-      >
+      <div className='searchBar'>
         <input
           type="text"
           placeholder="Search For Shows"
           name='showSearch'
+          value={showSearch}
+          onChange={e => setShowSearch(e.target.value)}
         />
-        <input type='submit' value="submit" />
-      </form>
+        <button type='submit' onClick={() => {
+          queryGetter(showSearch);
+          setDetailsPage(null)
+        }}>Submit</button>
+        <button type='clear' onClick={() => {
+          setShowSearch('');
+          queryGetter('')
+        }}>Clear</button>
+      </div>
 
       {detailsPage ?
         detailsPage
         :
         <div className='show-list'>
-          {showList.map(show => <ShowTile genre={genre} setGenre={setGenre} setDetailsPage={setDetailsPage} show={show} key={show.id} />)}
+          {queryShow.map(show => <ShowTile genre={genre} setGenre={setGenre} setDetailsPage={setDetailsPage} show={show} key={show.id} />)}
         </div>
       }
 
     </>
   )
 }
-
-// function search(formData) {
-//     const query = formData.get("showSearch");
-//     alert(`You searched for '${query}'`);
-//   }
-
-// function enterSubmit(input) {
-  //   //if keystroke is enter
-  //   // do same as search button
-  //   //queryShowSetter(input)
-  //   console.log(input)
-  //   //else ignore
-  // }

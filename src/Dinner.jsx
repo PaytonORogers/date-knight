@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { DinnerDetails } from './DinnerDetails.jsx'
-
+const flag = true;
 
 // Sample data from the spoonful API since they have rate limits :(
 var testData = {
@@ -5053,33 +5053,35 @@ export function Dinner({ genre, setGenre }) {
   useEffect(() => {
     console.log(genre)
     if (genre.includes("Anime")) {
-      randomFetch(apikey, 10, ",Japanese")
+      randomFetch(apikey, 10, ",japanese")
     } else if (genre.includes("Romance")) {
-      randomFetch(apikey, 10, ",Italian")
+      randomFetch(apikey, 10, ",italian")
     } else if (genre.includes("Fantasy")) {
-      randomFetch(apikey, 10, ",Nordic")
+      randomFetch(apikey, 10, ",nordic")
     } else if (genre.includes("Adventure")) {
-      randomFetch(apikey, 10, ",Caribbean,LatinAmerican")
+      randomFetch(apikey, 10, ",caribbean,latinAmerican")
     } else if (genre.includes("DIY")) {
-      randomFetch(apikey, 10, ",American")
+      randomFetch(apikey, 10, ",american")
     } else if (genre.includes("Espionage")) {
-      randomFetch(apikey, 10, ",British")
+      randomFetch(apikey, 10, ",british")
     } else if (genre.includes("Food")) {
-      randomFetch(apikey, 10, ",French")
+      randomFetch(apikey, 10, ",french")
     } else if (genre.includes("Legal")) {
-      randomFetch(apikey, 10, ",Chinese")
+      randomFetch(apikey, 10, ",chinese")
     } else if (genre.includes("Mystery")) {
-      randomFetch(apikey, 10, ",British")
+      randomFetch(apikey, 10, ",british")
     } else if (genre.includes("Nature")) {
-      randomFetch(apikey, 10, ",Nordic")
+      randomFetch(apikey, 10, ",nordic")
     } else if (genre.includes("Travel")) {
-      randomFetch(apikey, 10, ",European")
+      randomFetch(apikey, 10, ",european")
     } else if (genre.includes("War")) {
-      randomFetch(apikey, 10, ",EasternEuropean")
+      randomFetch(apikey, 10, ",easternEuropean")
     } else if (genre.includes("Western")) {
-      randomFetch(apikey, 10, ",American")
+      randomFetch(apikey, 10, ",american")
+    } else if (genre.includes("default")) {
+      setRecipeList(testData.recipes)
     } else {
-      randomFetch(apikey, 10, "")
+      randomFetch(apikey, 10, null)
     }
   }, [genre])
 
@@ -5087,11 +5089,21 @@ export function Dinner({ genre, setGenre }) {
   // fetches a random list of recipes by query as a properly asynced function
 
   const randomFetch = async (apikey, numOfResults, query) => {
-    // const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apikey}&number=${numOfResults}&include-tags=${query}`)
-    // const data = await response.json();
-    // console.log(data.recipes);
-    // setRecipeList(data.recipes);
-    setRecipeList(testData.recipes);
+    if (flag) {
+      if (query == null) {
+        const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apikey}&number=${numOfResults}`)
+        const data = await response.json();
+        console.log(data.recipes);
+        setRecipeList(data.recipes);
+      } else {
+        const response = await fetch(`https://api.spoonacular.com/recipes/random?apiKey=${apikey}&number=${numOfResults}&include-tags=maindish${query}`)
+        const data = await response.json();
+        console.log(data.recipes);
+        setRecipeList(data.recipes);
+      }
+    } else {
+      setRecipeList(testData.recipes);
+    }
   }
 
 
@@ -5103,7 +5115,7 @@ export function Dinner({ genre, setGenre }) {
         {detailsPage ?
           detailsPage
           : recipeList.map(item => (
-            <div className="recipe-poster" onClick={() => {DinnerDetails(item, setDetailsPage)}}>
+            <div className="recipe-poster" onClick={() => { DinnerDetails(item, setDetailsPage) }}>
               <p className="recipe-title">{item["title"]}</p>
               <img className="recipe-image" src={item["image"]} />
             </div>

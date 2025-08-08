@@ -10,8 +10,16 @@ export function ShowTile({ show, setDetailsPage, genre, setGenre }) {
     <>
       <div className="Movie-Poster" onClick={() => ShowDetails(show, setDetailsPage, genre, setGenre)}>
           <div className="poster-title">{show.name}</div>
-          <img className="Poster" src={show.image.medium} />
+          {show.image != undefined ? (<img className="Poster" src={show.image.medium}/>) : null}
       </div>
     </>
   )
 }
+
+
+// function example() {
+//   return condition1 ? value1
+//     : condition2 ? value2
+//     : condition3 ? value3
+//     : value4;
+// }
